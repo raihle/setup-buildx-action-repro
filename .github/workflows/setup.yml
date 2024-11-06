@@ -1,0 +1,15 @@
+name: Set up buildx
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          buildkitd-flags: --debug
+          buildkitd-config-inline: |
+            debug = true
+            [registry."docker.io"]
+              mirrors = ["an-address-that-should-not-work"]
